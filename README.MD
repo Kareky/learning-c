@@ -1,1 +1,1 @@
-A simple repository where I post my excercise and my progress about C#
+A simple repository where I post my excercises and progresses about C#
