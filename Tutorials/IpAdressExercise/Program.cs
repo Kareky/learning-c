@@ -19,23 +19,7 @@ namespace IpAdressExercise
                 return;
             }
 
-            //Validating the IP address
-            if (!IPv4Address.SplitIP(ipAdress, out string[] parts))
-            {
-                Console.WriteLine("Invalid IP Address: the format of the IP address is incorrect. Verify and try again");
-                return;
-            }
-
-            foreach (string part in parts)
-            {
-                if (!IPv4Address.ValidateLeadingZeroes(part) || !IPv4Address.ValidateRange(part))
-                {
-                    Console.WriteLine("Invalid IP Address: one or more parts of the IP address are incorrect. Verify and try again");
-                    return;
-                }
-            }
-
-            Console.WriteLine("The IP Address is valid");
+            IPv4Address.VerifyIP(ipAdress);
         }
     }
 
@@ -57,16 +41,39 @@ namespace IpAdressExercise
             return true;
         }
 
+        //Method that verify if the IP address is valid or not
+        //It prints the result to the console
+        internal static void VerifyIP(string ipAdress)
+        {
+            //Validating the IP address
+            if (!IPv4Address.SplitIP(ipAdress, out string[] parts))
+            {
+                Console.WriteLine("Invalid IP Address: the format of the IP address is incorrect. Verify and try again");
+                return;
+            }
+
+            foreach (string part in parts)
+            {
+                if (!IPv4Address.ValidateLeadingZeroes(part) || !IPv4Address.ValidateRange(part))
+                {
+                    Console.WriteLine("Invalid IP Address: one or more parts of the IP address are incorrect. Verify and try again");
+                    return;
+                }
+            }
+
+            Console.WriteLine("The IP Address is valid");
+        }
+
         //Method that split the IP address into its four parts
         //It return false if the IP doesn't have 4 parts
-        internal static bool SplitIP(string ipAdress, out string[] parts)
+        private static bool SplitIP(string ipAdress, out string[] parts)
         {
             parts = ipAdress.Split('.', StringSplitOptions.RemoveEmptyEntries);
             return parts.Length == 4;
         }
 
         //Method that check if an IPv4 part have leading zeroes
-        internal static bool ValidateLeadingZeroes(string part)
+        private static bool ValidateLeadingZeroes(string part)
         {
             if (part.StartsWith('0') && part.Length > 1)
                 return false;
@@ -74,7 +81,7 @@ namespace IpAdressExercise
         }
         //Method that validate if a single part of a IPv4 is between 0 and 255
         //The method return false if conditions aren't met
-        internal static bool ValidateRange(string part)
+        private static bool ValidateRange(string part)
         {    
             if (!int.TryParse(part, out int digit))
                 return false;
