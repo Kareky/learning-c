@@ -29,7 +29,7 @@ static void Process1()
     {
         WriteMessage();
     }
-    catch (Exception ex)
+    catch (DivideByZeroException ex)
     {
         Console.WriteLine($"Exception caught in Process1: {ex.Message}");
     }
