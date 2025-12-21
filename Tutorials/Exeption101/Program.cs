@@ -46,14 +46,14 @@ static void WriteMessage()
         Console.WriteLine($"Exception caught in WriteMessage: {ex.Message}");
     }
     checked
-{
-    try
     {
-        smallNumber = (byte)number1;
+        try
+        {
+            smallNumber = (byte)number1;
+        }
+        catch (OverflowException ex)
+        {
+            Console.WriteLine($"Exception caught in WriteMessage: {ex.Message}");
+        }  
     }
-    catch (OverflowException ex)
-    {
-        Console.WriteLine($"Exception caught in WriteMessage: {ex.Message}");
-    }  
-}
 }
